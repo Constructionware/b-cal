@@ -96,7 +96,7 @@ class Wall(Door):
         if thickness and unit:
             if unit == self._unit:
                 self._thickness  = thickness
-                return f"{self.__thickness} {self._unit}"
+                return f"{self._thickness} {self._unit}"
             self._unit = unit
             # Implement convert
             self._thickness = thickness
@@ -118,9 +118,7 @@ class Wall(Door):
             for d in self.door_wall_log:
                 if d['walltag'] == self.tag:
                     self.openings.append(d)
-                    #print(d)            
-            
-        
+                    #print(d)        
 
     def setup(self, walltype:str=None, library:dict=None):
         if walltype and library:
