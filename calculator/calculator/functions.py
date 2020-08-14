@@ -1,4 +1,4 @@
-# calculator.py
+# functions.py
 from pprint import pprint 
 import math 
 
@@ -12,7 +12,7 @@ class Trigonometry:
         between the sides and angles of triangles.
         '''
         if name:
-            self._name = name
+            self.trig_name = name
 
     @property
     def pi(self):
@@ -35,9 +35,9 @@ class Trigonometry:
         '''
         if degree and degree < 361:
             return math.radians(degree)
-        return 'You have exceded the maximimum circular degree of a true circle'
-    
+        return 'You have exceded the maximimum circular degree of a true circle' 
 
+        
     def degree(self, radian:float=None):
         '''
             Return the Aangular degrees radians given a radian.  
@@ -66,7 +66,7 @@ class Geometry(
         shapes, angles, positions  and dimensions of things.
         '''
         if name:
-            self._name = name
+            self.geo_name = name
     # Calculator Functions Here   
 
     def rcircle(self, radius:float=None):
