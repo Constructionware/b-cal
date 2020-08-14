@@ -1,11 +1,13 @@
 # calculator.py
 from pprint import pprint 
 import math 
-from calculator.walls import Wall
-from calculator.water import Water    
+from calculator.components import Wall, Roof
+from calculator.materials import Water    
+
     
 class Calculator(
     # Plugins   
+    Roof,
     Wall,
     Water,
     ):
@@ -143,5 +145,4 @@ class Calculator(
         return f" Calculator => {self._name}"
     
 cal = Calculator()
-if __name__ == '__main__': # Launch Calculator
-    cal = Calculator()
+
