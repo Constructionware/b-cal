@@ -1,22 +1,20 @@
 # calculator.py
 from pprint import pprint 
 import math 
-from calculator.components import Wall
-from calculator.materials import Water    
+
     
-class Calculator(
-    # Plugins   
-    Wall,
-    Water,
-    ):
-    _name:str = 'CentryPlan Building Calculator'
-   
+class Trigonometry: 
+
     def __init__(self, name:str=None, *args, **kwargs):
+
+        ''' 
+        Trigonometry is a branch of mathematics that studies relationships 
+        between the sides and angles of triangles.
+        '''
         if name:
             self._name = name
-            
-    # Calculator Functions Here
-    @property
+
+     @property
     def pi(self):
         return math.pi
     
@@ -28,10 +26,42 @@ class Calculator(
     def sqrt(self, num:float=None):
         """ Does not accept negative numbers"""
         if num and num > 0 :
-            return math.sqrt(num)
+            return math.sqrt(num)            
         return 
 
-    def area_r(self, num:float=None):
+     def radian(self, degree:float=None):
+        '''
+            Return the Aangular radians given a degrees.  
+        '''
+        if degree and degree < 361:
+            return math.radians(degree)
+        return 'You have exceded the maximimum circular degree of a true circle'
+    
+
+    def degree(self, radian:float=None):
+        '''
+            Return the Aangular degrees radians given a radian.  
+        '''
+        if radian and radian < self.angle_d(360):
+            return math.degrees(radian)
+        return 'You have exceded the maximimum radei of a true circle'
+
+    
+class Geometry(
+     # Plugins 
+     Trigonometry
+     ):       
+    def __init__(self, name:str=None, *args, **kwargs):
+        ''' 
+        Geometry is a branch of mathematics that studies the size, 
+        shapes, angles, positions  and dimensions of things.
+        '''
+        if name:
+            self._name = name
+
+    # Calculator Functions Here   
+
+    def rcircle(self, radius:float=None):
         '''
             Return the Area given a radius.            
             In geometry, the area enclosed by a circle of radius r is π r².
@@ -45,35 +75,20 @@ class Calculator(
                 Out[3]: 12.566370614359172
 
         '''
-        if num:
-            return self.sqr(num) * self.pi
-        pprint(self.area_r.__doc__, depth=1, width=60)
+        if radius:
+            return self.sqr(radius) * self.pi
+        pprint(self.rcircle.__doc__, depth=1, width=60)
         return 
 
-    def area_d(self, num:float=None):
+    def dcircle(self, diameter:float=None):
         '''
             Return the Area given a diameter.  
         '''
-        if num:
-            return (self.area_r(num / 2))
+        if diameter:
+            return (self.rcircle(diameter / 2))
         return 
     
-    def angle_d(self, num:float=None):
-        '''
-            Return the Aangular radians given a degrees.  
-        '''
-        if num and num < 361:
-            return math.radians(num)
-        return 'You have exceded the maximimum circular degree of a true circle'
-    
-
-    def angle_r(self, num:float=None):
-        '''
-            Return the Aangular degrees radians given a radian.  
-        '''
-        if num and num < self.angle_d(360):
-            return math.degrees(num)
-        return 'You have exceded the maximimum radei of a true circle'
+   
 
     def rectangle(self, length:float=None, width:float=None):
         '''
@@ -99,7 +114,7 @@ class Calculator(
             return (base / 2) * height
         return self.triangle.__dict__
 
-    def trapezium(self, toplength:float=None, baselength:float=None, height:float=None):
+    def trapezoid(self, toplength:float=None, baselength:float=None, height:float=None):
         '''
             Return the area of a Trapezium or Quadrilateral given the length of
             its two paralell sides and the distance between them.  
@@ -108,14 +123,15 @@ class Calculator(
             return ((toplength +  baselength) / 2) * height
         return self.trapezium.__doc__
 
-    def rafter_length(self, rise:float=None, run:float=None):
+    def quadrilateral(self, toplength:float=None, baselength:float=None, height:float=None):
+        return self.trapezoid( toplength, baselength, height):
+
+    def hypothenuse(self, rise:float=None, run:float=None):
         '''
-            Return the length of a rafter given its rise and run distance.  
+            Return the length the hypothenuse of a triangle given its rise and run distance.  
         '''
-        if rise and run:
-            rafter = {'length': self.sqrt( self.sqr(rise) + self.sqr(run) )}
-            rafter['cut_length'] = rafter['length'] * 1.05
-            return rafter
+        if rise and run:           
+            return self.sqrt( self.sqr(rise) + self.sqr(run) 
         return self.rafter_length.__doc__
 
     
