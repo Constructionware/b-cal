@@ -211,7 +211,7 @@ class Wall(
         if thickness and unit:
             if unit == self._unit:
                 self._thickness  = thickness
-                return f"{self.__thickness} {self._unit}"
+                return f"{self._thickness} {self._unit}"
             self._unit = unit
             # Implement convert
             self._thickness = thickness
