@@ -20,14 +20,16 @@ rise and base length.
 
  
 Calculate the length of a rafter given 
-its rise and run 
+its rise and run <br>
 
-    [4] cal.rafter(rise=2400, run=3600)
+![alt roof section](roofsect.png)
+
+    [4] cal.rafter(rise=1460, run=2901)
 
 Calculate the area and hip length of a Roof Hip Section
 
-    [4] cal.hip(rise=2400, run=3600, span=6000)
-    
+    [5] cal.hip(rise=1460, run=2901, span=6000)
+
 
 
 
