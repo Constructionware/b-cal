@@ -14,7 +14,7 @@ class Trigonometry:
         if name:
             self._name = name
 
-     @property
+    @property
     def pi(self):
         return math.pi
     
@@ -29,7 +29,7 @@ class Trigonometry:
             return math.sqrt(num)            
         return 
 
-     def radian(self, degree:float=None):
+    def radian(self, degree:float=None):
         '''
             Return the Aangular radians given a degrees.  
         '''
@@ -47,6 +47,15 @@ class Trigonometry:
         return 'You have exceded the maximimum radei of a true circle'
 
     
+    def hypothenuse(self, rise:float=None, run:float=None):
+        '''
+            Return the length the hypothenuse of a triangle given its rise and run distance.  
+        '''
+        if rise and run:           
+            return self.sqrt( self.sqr(rise) + self.sqr(run) )
+        return 
+
+    
 class Geometry(
      # Plugins 
      Trigonometry
@@ -58,7 +67,6 @@ class Geometry(
         '''
         if name:
             self._name = name
-
     # Calculator Functions Here   
 
     def rcircle(self, radius:float=None):
@@ -86,9 +94,7 @@ class Geometry(
         '''
         if diameter:
             return (self.rcircle(diameter / 2))
-        return 
-    
-   
+        return   
 
     def rectangle(self, length:float=None, width:float=None):
         '''
@@ -112,7 +118,7 @@ class Geometry(
         '''
         if base and height:                      
             return (base / 2) * height
-        return self.triangle.__dict__
+        return 
 
     def trapezoid(self, toplength:float=None, baselength:float=None, height:float=None):
         '''
@@ -121,43 +127,11 @@ class Geometry(
         '''
         if toplength and baselength and height:                      
             return ((toplength +  baselength) / 2) * height
-        return self.trapezium.__doc__
+        return 
 
     def quadrilateral(self, toplength:float=None, baselength:float=None, height:float=None):
-        return self.trapezoid( toplength, baselength, height):
+        return self.trapezoid(toplength, baselength, height)
 
-    def hypothenuse(self, rise:float=None, run:float=None):
-        '''
-            Return the length the hypothenuse of a triangle given its rise and run distance.  
-        '''
-        if rise and run:           
-            return self.sqrt( self.sqr(rise) + self.sqr(run) 
-        return self.rafter_length.__doc__
 
     
-    
-    def roof_hip(self, rise:float=None, run:float=None, span:float=None):
-        '''
-            .  
-        '''
-        if rise and span and run and rise < span:
-            hypothenuse = self.rafter_length(rise=rise, run=run)
-            rise_2 = hypothenuse['length']
-            run_2 = span / 2
-            hip = self.rafter_length(rise=rise_2, run=run_2)
-            return {
-                "area": hypothenuse['length'] * (span / 2), # formula for area of triangle
-                "fascia_to_ridge": run,
-                "hip": hip['length'],
-                "fascia": span
-            }           
-        return self.rafter_length.__doc__
-    
-    
-    
-    def __repr__(self):
-        return f" Calculator => {self._name}"
-    
-cal = Calculator()
-if __name__ == '__main__': # Launch Calculator
-    cal = Calculator()
+       

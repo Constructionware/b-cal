@@ -71,13 +71,14 @@ class Roof(
     def __init__(self, name:str=None, *args, **kwargs):
         if name:
             self.roofname = name
+        self.roofname = "Building Roof"
 
     def rafter(self, rise:float=None, run:float=None):
         '''
             Return the length the rafter given its rise and run distance.  
         '''
         if rise and run:
-            rafter = {'length': self.sqrt( self.sqr(rise) + self.sqr(run) )}
+            rafter = {'length': self.hypothenuse(rise, run)}
             rafter['cut_length'] = rafter['length'] * 1.05
             return rafter
         return self.rafter.__doc__
@@ -85,17 +86,18 @@ class Roof(
     
     def hip(self, rise:float=None, run:float=None, span:float=None):
         '''
-            .  
+           Roof: Returns the area and hip length of a hipped section of roof 
+            given the rise run and width across its fascia or main span.  
         '''
         if rise and span and run and rise < span:
-            hypothenuse = self.rafter_length(rise=rise, run=run)
-            rise_2 = hypothenuse['length']
+            hypothenuse = self.hypothenuse(rise=rise, run=run)
+            rise_2 = hypothenuse
             run_2 = span / 2
-            hip = self.rafter_length(rise=rise_2, run=run_2)
+            hip = self.hypothenuse(rise=rise_2, run=run_2)
             return {
-                "area": hypothenuse['length'] * (span / 2), # formula for area of triangle
-                "fascia_to_ridge": run,
-                "hip": hip['length'],
+                "area": hypothenuse * (span / 2), # formula for area of triangle
+                "run": run,
+                "hip": hip,
                 "fascia": span
             }           
         return self.hip.__doc__
@@ -108,37 +110,43 @@ class Wall(
     # Plugins 
     Geometry,
     Door
-    ):    
-    tag:str=None
-    walltype:str = None
-    form:str = 'solid'
-    usage:str = None
-    bearing:bool = False
-    nonbearing:bool = True
-    comments:str = None    
-    _name:str = 'Building Wall'
-    _length:float = None
-    _height:float = None
-    _thickness:float=None
-    _unit:str = "m"
-    _count:int = 1
+    ): 
     
+    tag:str = None
+    _unit:str = "m"
+    _count:int = 1  
+    _height:float = None
+    _length:float = None
+    _thickness:float = None       
 
-    def __init__(self, walltype:str = None, height:float = None, length:float = None, thickness:float = None, usage:str = None, tag:str = None):
-        self.walltype = walltype
-        self.tag = tag
+    def __init__(
+        self, 
+        walltype:str = None,
+        height:float = None, 
+        length:float = None, 
+        thickness:float = None, 
+        usage:str = None, 
+        tag:str = None
+        ):
+        self.bearing:bool = False
+        self.comments:str = None
+        self.form:str = 'hard-solid'
+        self.nonbearing:bool = True
+        self.openings = []
+        self.tag = tag 
+        self.usage = usage
+        self.wall_name = 'Building Wall'
+        self.walltype = walltype       
         self._height = height
         self._length = length
-        self._thickness = thickness
-        self.usage = usage
-        self.update
-        self.openings = []
-        if tag:
-            self.wall_tags.add(tag)
-        
+        self._thickness = thickness       
+        self.update  
+        if tag:            
+            self.wall_tags.add(tag)        
 
     @property
     def update(self):
+        self.process_wallopenings
         if self.usage and self.usage == 'structural':
             self.bearing = True
             self.nonbearing = False
@@ -149,10 +157,10 @@ class Wall(
     def wallname(self, name:str=None):
         ''' Get or set .'''
         if name:
-            self._name = name
+            self.wall_name = name
         else:
             pass
-        return self._name
+        return self.wall_name
 
     def wallength( self , length:float=None, unit:str=None):
         """ Wall length  if you supply a unit Wall will asume that
@@ -216,7 +224,8 @@ class Wall(
             # Implement convert 
             return f"{self._thickness} {self._unit}"           
         return f"{self._thickness} {self._unit}"
-
+    
+    @property
     def process_wallopenings(self):
         #print(self.door_wall_log)
         #print(self.wall_tags)
@@ -225,10 +234,8 @@ class Wall(
             for d in self.door_wall_log:
                 if d['walltag'] == self.tag:
                     self.openings.append(d)
-                    #print(d)            
-            
-        
-
+                    #print(d) 
+      
     def setup(self, walltype:str=None, library:dict=None):
         if walltype and library:
             self.wallunit = library.get(walltype, 'Invalid walltype')
@@ -236,20 +243,20 @@ class Wall(
             self.wallthickness(self.wallunit['thickness'] / 1000)
             
     def __repr__(self):        
-        return f"{self._name} Type: {self.walltype} L:{self._length} H:{self._height}  T: {self._thickness} U:{self._unit}"
+        return f"{self.wall_name} Type: {self.walltype} L:{self._length} H:{self._height}  T: {self._thickness} U:{self._unit}"
 
     @classmethod
     def cmu(cls, walltype:str=None, height:float = None, length:float = None, usage:str = None, tag:str = None):
         ''' Concrete Masonry Unit Wall '''
         wall = Wall()
-        wall._name = "Concrete Masony Unit Wall"
+        wall.wall_name = "Concrete Masony Unit Wall"
         wall.tag = tag
         wall.usage = usage
         wall.wallheight(height)
         wall.wallength (length)
+        wall.openings = [] 
         wall.setup(walltype =walltype, library=library.cmulib)
-        wall.update
-        wall.openings = []
+        wall.update        
         if tag:
             wall.wall_tags.add(tag)        
         return wall
@@ -258,14 +265,14 @@ class Wall(
     def drywall(cls, walltype:str='75', height:float = None, length:float = None, usage:str = 'Internal Partitioning', tag:str = None):
         ''' Dry Wall  Sheet Rock Wall '''        
         wall = Wall()
-        wall._name = "Dry Wall"
+        wall.wall_name = "Dry Wall"
         wall.tag = tag
         wall.usage = usage
         wall.wallheight(height)
         wall.wallength (length)
+        wall.openings = [] 
         wall.setup(walltype =walltype, library=library.sheetrocklib)
         wall.update
-        wall.openings = []
         if tag:
             wall.wall_tags.add(tag)
         
