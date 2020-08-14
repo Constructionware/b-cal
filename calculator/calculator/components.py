@@ -2,6 +2,8 @@ import uuid
 from time import time, ctime
 from calculator.functions import Geometry
 
+from calculator.builderslib import library
+from calculator.functions import Geometry
 
 class Door:
     dlog:list = []
@@ -210,7 +212,7 @@ class Wall(
         if thickness and unit:
             if unit == self._unit:
                 self._thickness  = thickness
-                return f"{self.__thickness} {self._unit}"
+                return f"{self._thickness} {self._unit}"
             self._unit = unit
             # Implement convert
             self._thickness = thickness
@@ -278,6 +280,3 @@ class Wall(
         return wall
         
 
-#d = Door.externalDoor()
-#d1=Door(doortype='Internal Hollow', width=900, height=2100, thickness = 42, tag='D2')
-#d2=Door(doortype='External Solid', width=925, height=2100, thickness = 50, tag ='D1')

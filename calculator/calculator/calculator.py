@@ -3,7 +3,6 @@ from pprint import pprint
 import math 
 from calculator.components import Wall, Roof
 from calculator.materials import Water    
-
     
 class Calculator(
     # Plugins   
