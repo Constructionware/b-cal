@@ -24,11 +24,25 @@ its rise and run <br>
 
 ![alt roof section](roofsect.png)
 
+
     [4] cal.rafter(rise=1460, run=2901)
+
 
 Calculate the area and hip length of a Roof Hip Section
 
-    [5] cal.hip(rise=1460, run=2901, span=6000)
+![alt roof plan](roofplan.jpg) ![alt roof](sect-a.jpg)
+
+
+    [5] cal.hip(rise=1469, run=2922, span=5843)
+
+b-cal returns a JSON object with key mapping to computed values.
+
+Calculate Area of Roof segment given the length of ridge and fascia, run and rise 
+
+![alt roof plan](roofplan-2.jpg)
+
+
+
 
 
 
