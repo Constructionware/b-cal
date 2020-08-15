@@ -42,6 +42,8 @@ Calculate Area of Roof segment given the length of ridge and fascia, run and ris
 ![alt roof plan](roofplan-2.jpg)
 
 
+### Dependency
+python 3.6 ++
 
 
 
