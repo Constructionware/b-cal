@@ -3,7 +3,7 @@ A Construction Estimator and Building Parts calculator
 
 ## Introduction
 
-The Building Calculator provides a suite of geometric and trigonomic functions essential to estimating construction and industry related jobs.
+B-cal provides a suite of geometric and trigonomic functions essential to estimating construction and industry related jobs.
 
 ## Installation
     $ pip install b_cal
