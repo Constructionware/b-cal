@@ -81,6 +81,7 @@ class Roof(
         if rise and run:
             rafter = {'length': self.hypothenuse(rise, run)}
             rafter['cut_length'] = rafter['length'] * 1.05
+            rafter['pitch'] = rise / run
             return rafter
         return self.rafter.__doc__
     
@@ -99,7 +100,8 @@ class Roof(
                 "area": hypothenuse * (span / 2), # formula for area of triangle
                 "run": run,
                 "hip": hip,
-                "fascia": span
+                "fascia": span,
+                "pitch": rise / run
             }           
         return self.hip.__doc__
     

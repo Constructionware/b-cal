@@ -3,7 +3,7 @@ A Construction Estimator and Building Parts calculator
 
 ## Introduction
 
-The Building Calculator provides a suite of geometric and trigonomic functions essential to estimating construction and industry related jobs.
+B-cal provides a suite of geometric and trigonomic functions essential to estimating construction and industry related jobs.
 
 ## Installation
     $ pip install b_cal
@@ -20,14 +20,30 @@ rise and base length.
 
  
 Calculate the length of a rafter given 
-its rise and run 
+its rise and run <br>
 
-    [4] cal.rafter(rise=2400, run=3600)
+![alt roof section](roofsect.png)
+
+
+    [4] cal.rafter(rise=1460, run=2901)
+
 
 Calculate the area and hip length of a Roof Hip Section
 
-    [4] cal.hip(rise=2400, run=3600, span=6000)
-    
+![alt roof plan](roofplan.jpg) ![alt roof](sect-a.jpg)
+
+
+    [5] cal.hip(rise=1469, run=2922, span=5843)
+
+b-cal returns a JSON object with key mapping to computed values.
+
+Calculate Area of Roof segment given the length of ridge and fascia, run and rise 
+
+![alt roof plan](roofplan-2.jpg)
+
+
+
+
 
 
 
