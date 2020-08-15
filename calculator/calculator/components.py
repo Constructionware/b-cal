@@ -82,6 +82,7 @@ class Roof(
             rafter = {'length': self.hypothenuse(rise, run)}
             rafter['cut_length'] = rafter['length'] * 1.05
             rafter['pitch'] = rise / run
+            rafter['slope'] = self.degrees(rafter['pitch'])
             return rafter
         return self.rafter.__doc__
     
@@ -97,13 +98,37 @@ class Roof(
             run_2 = span / 2
             hip = self.hypothenuse(rise=rise_2, run=run_2)
             return {
-                "area": hypothenuse * (span / 2), # formula for area of triangle
-                "run": run,
-                "hip": hip,
+                "area": round(hypothenuse * (span / 2), 2), # formula for area of triangle
                 "fascia": span,
-                "pitch": rise / run
+                "hip": round(hip, 2),
+                "pitch": rise / run,
+                "rise": rise,
+                "run": run,
+                "slope": round(self.degree(rise / run), 2),
+                "span": span
             }           
         return self.hip.__doc__
+        
+
+    def roof_segment(self, ridge:float=None, fascia:float=None, rise:float=None, run:float=None):
+        '''
+            Roof Segment Returns the area and rise slope pitch and supplied parameters  a section of roof 
+            wherein the fascia runs parallel to the ridge,  given the ridge, the fascia, the rise and the run.  
+        '''
+        if rise and run and rise < run:
+            hypothenuse = self.hypothenuse(rise=rise, run=run)
+            return {
+                    "area": round( (hypothenuse * ((ridge + fascia) / 2)), 2), # formula for area of parallelogram
+                    "fascia": fascia,
+                    "pitch": rise / run,
+                    "rafter": hypothenuse,
+                    "ridge": ridge,
+                    "rise": rise, 
+                    "run": run,
+                    "slope": round(self.degree(rise / run), 2)
+                    
+            }           
+        return self.roof_segment.__doc__
     
     def __repr__(self):
         return f" Roof: {self.roofname}"

@@ -42,7 +42,7 @@ class Trigonometry:
         '''
             Return the Aangular degrees radians given a radian.  
         '''
-        if radian and radian < self.angle_d(360):
+        if radian and radian < self.radian(360):
             return math.degrees(radian)
         return 'You have exceded the maximimum radei of a true circle'
 
@@ -71,7 +71,7 @@ class Geometry(
 
     def rcircle(self, radius:float=None):
         '''
-            Return the Area given a radius.            
+            Return the Area of a circle given its radius.            
             In geometry, the area enclosed by a circle of radius r is π r².
              Here the Greek letter π represents a constant, approximately equal to 3.14159, which is equal to 
              the ratio of the circumference of any circle to its diameter. Source: wikipedia.com.
@@ -90,7 +90,7 @@ class Geometry(
 
     def dcircle(self, diameter:float=None):
         '''
-            Return the Area given a diameter.  
+            Return the Area of a circle given its diameter.  
         '''
         if diameter:
             return (self.rcircle(diameter / 2))
