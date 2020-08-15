@@ -59,10 +59,11 @@ distances.
     {'area':9554709.81,
     'fascia': 3021,
     'pitch': 0.50273785,
+    'rafter': 3270.48,
+    'ridge': 3021,
     'rise': 1469,
     'run': 2922,
-    'slope': 28.8,
-    }
+    'slope': 28.8}
 
 ### Dependency
 python 3.6 ++
