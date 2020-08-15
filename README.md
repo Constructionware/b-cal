@@ -18,6 +18,8 @@ rise and base length.
 
     [3] cal.hypothenuse(rise=8, run=14)
 
+
+## Construction Estimating
  
 Calculate the length of a rafter given 
 its rise and run <br>
