@@ -10,7 +10,7 @@ class Calculator(
     Wall,
     Water,
     ):
-    _name:str = 'CentryPlan Building Calculator'
+    _name = 'CentryPlan Building Calculator'
    
     def __init__(self, name:str=None, *args, **kwargs):
         if name:
