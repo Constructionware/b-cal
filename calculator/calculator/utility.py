@@ -17,15 +17,16 @@ class FileUtility:
                 self.name = args[0] 
                 print(self.name, 'Initiliazsed...')    
 
-    def _json_to_csv(self, file:str, obj:dict):
-        keys = [*obj]
-        items = [obj[key] for key in keys]
+    def _json_to_csv(self, file:str, data:list):
+        keys = [*data[0]]
+        items =[[obj[key] for key in keys] for obj in data]
         print(keys)
         print(items)
         with open(file, 'w') as outfile:
             writer = csv.writer(outfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow([*obj])
-            writer.writerow(items)
+            writer.writerow(keys)
+            for item in data:
+                writer.writerow(data)
         return f"{file} Saved."  
 
 
@@ -49,22 +50,15 @@ class FileUtility:
         if file and data:
             try:
                 if len(data) > 0:
-                    self._json_to_csv(file=file, obj=data)
+                    self._json_to_csv(file=file, data=data)
             except Exception as e:
                 return e
-        try:
-            # if user did'nt supply a filename use the id key of the data
-            if len(data) > 0 and 'id' in data:
-                file = f"{data['id']}.csv"
-                self._json_to_csv(file=file, obj=data)                
-        except Exception as e:
-            return e
+        
         try:
             # if user did'nt supply a filename and data does not have an id key use the first item key of data
             if len(data) > 0:
-                keys = [*data]
-                file = f"{keys[0]}.csv"
-                self._json_to_csv(file=file, obj=data)               
+                file = f"{data[0]['id']}.csv"
+                self._json_to_csv(file=file, data=data)               
         except Exception as e:
             return e
         return
