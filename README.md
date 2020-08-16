@@ -26,6 +26,10 @@ rise and base length.
 
     [3] cal.hypothenuse(rise=8, run=14)
 
+
+## Construction Estimating
+ 
+=======
 ## Estimate Building Components 
 
 B-cal's Building Parts calculator currently estimates building foundations, walls,
@@ -38,6 +42,7 @@ Estimate a concrete block wall given its length its height and thickness.
 
 
 ### Estimating Roof Segments
+
 
 Calculate the length of a rafter given 
 its rise and run <br>

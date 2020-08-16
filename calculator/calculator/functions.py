@@ -1,4 +1,4 @@
-# calculator.py
+# functions.py
 from pprint import pprint 
 import math 
 
@@ -12,7 +12,7 @@ class Trigonometry:
         between the sides and angles of triangles.
         '''
         if name:
-            self._name = name
+            self.trig_name = name
 
     @property
     def pi(self):
@@ -35,14 +35,14 @@ class Trigonometry:
         '''
         if degree and degree < 361:
             return math.radians(degree)
-        return 'You have exceded the maximimum circular degree of a true circle'
-    
+        return 'You have exceded the maximimum circular degree of a true circle' 
 
+        
     def degree(self, radian:float=None):
         '''
             Return the Aangular degrees radians given a radian.  
         '''
-        if radian and radian < self.angle_d(360):
+        if radian and radian < self.radian(360):
             return math.degrees(radian)
         return 'You have exceded the maximimum radei of a true circle'
 
@@ -66,12 +66,12 @@ class Geometry(
         shapes, angles, positions  and dimensions of things.
         '''
         if name:
-            self._name = name
+            self.geo_name = name
     # Calculator Functions Here   
 
     def rcircle(self, radius:float=None):
         '''
-            Return the Area given a radius.            
+            Return the Area of a circle given its radius.            
             In geometry, the area enclosed by a circle of radius r is π r².
              Here the Greek letter π represents a constant, approximately equal to 3.14159, which is equal to 
              the ratio of the circumference of any circle to its diameter. Source: wikipedia.com.
@@ -90,7 +90,7 @@ class Geometry(
 
     def dcircle(self, diameter:float=None):
         '''
-            Return the Area given a diameter.  
+            Return the Area of a circle given its diameter.  
         '''
         if diameter:
             return (self.rcircle(diameter / 2))
